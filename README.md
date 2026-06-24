@@ -13,7 +13,7 @@ It felt like something far beyond my reach. I had no foundation in IT, some know
 Yet the challenge called to me. This was a path that could grant me the skills and experience to stand against those who would bring harm through the digital world. And so, I chose to walk it.
 
 ## An analysis of the fields within cybersecurity
-![A custom crystal image used as a bullet point](crystal_bullet.png) There's actually a lot of fields within cybersecurity I didn't know about. These fields can be grouped within roughly 4 categories.
+![A custom crystal image used as a bullet point](crystal_bullet.png) There's actually a lot of fields within cybersecurity I didn't know about. These fields can be grouped within roughly 4 categories, though this could change by tomorrow with how fast things can evolve.
 
 1. Defensive team (Blue team)
    - Network Security (protecting networks)
