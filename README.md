@@ -12,28 +12,39 @@ It felt like something far beyond my reach. I had no foundation in IT, some know
 
 Yet the challenge called to me. This was a path that could grant me the skills and experience to stand against those who would bring harm through the digital world. And so, I chose to walk it.
 
-## An analysis of the fields within cybersecurity
-![A custom crystal image used as a bullet point](crystal_bullet.png) There's actually a lot of fields within cybersecurity I didn't know about. These fields can be grouped within roughly 4 categories, though this could change by tomorrow with how fast things can evolve.
+## The realms of cybersecurity
+![A custom crystal image used as a bullet point](crystal_bullet.png)
 
-1. Defensive team (Blue team)
-   - Network Security (protecting networks)
-   - Endpoint Security (protecting devices)
-   - Cloud Security (protecting the cloud)
-   - Identity and Access Management (protecting who has access to what)
-   - Data Security and Privacy (protecting valuable data)
-   - Security Operations (monitoring, detecting, and responding)
+There are many paths an adventurer can take in this realm. While the landscape evolves quickly, most roles fall into four major categories:
 
-2. Offensive team (Red team)
-   - Penetration testing (attack)
-   - Red teaming (simulations)
+### 🛡️ The Defenders (Blue Team)
+Those who stand on the walls and protect the realm.
 
-3. Support
-   - Governance, risk, and compliance (policies and risk management)
-   - Threat intelligence (researching and analyzing the bad guys)
+- **Network Security** — Guarding the roads and borders between kingdoms
+- **Endpoint Security** — Protecting the individual warriors and their gear
+- **Cloud Security** — Defending the floating cities and crystal servers above
+- **Identity & Access Management** — Deciding who may enter the castle gates
+- **Data Security & Privacy** — Safeguarding the kingdom’s most precious treasures
+- **Security Operations** — Ever-vigilant watchtowers that detect and respond to threats
 
-4. Special/Niche roles
-   - Cryptography (designing encryption)
-   - Forensics (investigating and recovering from incidents)
-   - Malware analysis (seeing how malware works)
-   - Application security (Securing applications) This one lives between software development and cybersecurity
+### ⚔️ The Shadow Strikers (Red Team)
+Those who test the defenses by walking in the darkness.
 
+- **Penetration Testing** — Probing the walls for weaknesses
+- **Red Teaming** — Full-scale simulated invasions to train the defenders
+
+### 📜 The Scholars & Stewards (Support)
+Those who study the enemy and write the laws of the land.
+
+- **Governance, Risk & Compliance** — Creating the treaties and rules that keep order
+- **Threat Intelligence** — Spies and scholars who learn the ways of the enemy
+
+### 🔮 The Specialists
+Masters of rare and powerful arts.
+
+- **Cryptography** — Weaving powerful encryption spells
+- **Digital Forensics** — Investigating ruins after an attack and recovering what was lost
+- **Malware Analysis** — Studying the fiends and understanding how they corrupt
+- **Application Security** — Securing the very tools and weapons we build (this path sits between the worlds of development and defense)
+
+---
