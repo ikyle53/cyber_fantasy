@@ -1,43 +1,41 @@
-""" ##################################################################################
+""" 
+##################################################################################
 The following code is native with no AI generated code
 
 Binary Codex - Duty: 1
-
-Time to completion: ~2 hours
-
-What I learned: I originally spent most of my time thinking of if/else cases where
-                it would cover 0, less than, equal to, and more than. However, trouble 
-                arose in the case of any numbers above 128. I did the binary on paper
-                after awhile and realized I have to be able to change/update the user's 
-                number in order to deal with that range of numbers. I'd have to subtract
-                the iteration from the user's number~ by doing so this also takes care of 
-                further 'less than' cases to skip to a relevant iteration. I realized 
-                the zero case was redundant if I have a 'more than' statement so I got 
-                rid of that. Alas, it dawned on me that combining 'less than' and 
-                'equal to' was what matched on my paper representation. This also makes
-                complete sense given that the user's number is being updated so it won't
-                have to individually compare for equality.
-
-Future implementations: If a non-integer is submitted the program breaks. I need to 
-                create a way to check for integers only (try/except?). Once it asks 
-                for a number it only asks once more and doesn't actually run the program. 
-                I'll need to loop for user input until something is valid. 
-
-    ##################################################################################
+##################################################################################
 """
+# Program Start
+# ---------------------------------------------------------------------------------------
+def start_program():
+    userInput = input("Please submit option 1 or 2:\n" \
+    "1: Convert decimal to binary\n" \
+    "2: Convert binary to decimal\n")
 
+    if userInput == "1":
+        translate_to_binary()
+    elif userInput == "2":
+        translate_to_decimal()
+    else:
+        start_program()
+
+# Translation from decimal to binary
+# ----------------------------------------------------------------------------------------
 def translate_to_binary():
     # Ask for user input
-    userInput = int(input(f"\nEnter a number between 0 - 255 to tranlate it to binary\n"))
+    userInput = input(f"\nEnter a number between 0 - 255 to tranlate it to binary\n")
     
     # Check for integers between 0-255
-    if userInput in range(0, 256):
+    if userInput.isalpha():
+        print(f"Number submitted isn't within the range of 0-255\n")
+        start_program()
+    elif int(userInput) in range(0, 256):
         # reference for binary
         binary_template = [128, 64, 32, 16, 8, 4, 2, 1]
         # final binary output for printing
         binary_number = []
         # helper number ensures the original user input isn't changed
-        helper_number = userInput
+        helper_number = int(userInput)
 
         """
         The following for loop iterates through the binary_template and compares each
@@ -52,6 +50,7 @@ def translate_to_binary():
                 helper_number. If it IS greater than the helper_number it will append
                 a 0 to the binary_number list.
         """
+        
         for x in binary_template:
             # First
             if x <= helper_number:
@@ -60,8 +59,43 @@ def translate_to_binary():
             # Second
             elif x > helper_number:
                 binary_number.append(0)
-
+        print("********************************************")
+        print(f"{userInput} converts to:")
         print(*binary_number, sep='')
-    else:
-        userInput = int(input(f"\nEnter a number between 0 - 255 to tranlate it to binary\n"))
-translate_to_binary()
+        print(f"********************************************\n")
+    start_program()
+
+# Translation from binary to decimal
+# ---------------------------------------------------------------------------------------------
+def translate_to_decimal():
+    userInput = input(f"\nEnter an 8-bit binary number to convert to decimal\n")
+    binary_helper = userInput
+    binary_template = [128, 64, 32, 16, 8, 4, 2, 1]
+    decimal_number = 0
+
+    """
+    This for loop uses the built in zip() method to iterate over
+    both the binary_template array and the user's input. This is
+    based off of the 8bit decimal and won't work outside of that.
+    I added a check to make sure the binary is 1, 0, and a length
+    of 8 digits. Outside of that it will return to program start.
+    """
+
+    for index1, index2 in zip(binary_helper, binary_template):
+        if index1 == "1" and len(binary_helper) == 8:
+            print("if1 = 1")
+            decimal_number = decimal_number + index2
+        elif index1 == "0" and len(binary_helper) == 8:
+            print("if2 = 0")
+            pass
+        elif len(index1) < 8:
+            print(f"The binary entered wasn't 8 digits long or wasn't a number\n")
+            start_program()
+
+    print("********************************************")
+    print(f"\n{userInput} converts to: \n{decimal_number}\n")
+    print("********************************************")
+
+    start_program()
+
+start_program()
