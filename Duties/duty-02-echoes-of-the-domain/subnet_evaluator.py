@@ -9,7 +9,7 @@ Subnet evaluator - Duty: 2
 # Program Start
 # ---------------------------------------------------------------------------------------
 def start_program():
-    userInput = input("Please submit an IP address for subnet construction:\n") # 192.12.6.45
+    userInput = input("Please submit an IP address for subnet evaluation:\n") # 192.12.6.45
     ip_addr = userInput
 
     """
