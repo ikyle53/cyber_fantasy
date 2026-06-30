@@ -111,19 +111,22 @@ def get_network_address(cidr, ip):
     numbers with 0 * (4-2) for a total of 2 replaced numbers.
     """
     if cidr == 8:
-        temp_ip[1:] = [0] * (len(temp_ip) - 1)
+        temp_ip[1:] = [255] * (len(temp_ip) - 1)
+        temp_ip[-1] = 254
         stringify = '.'.join(map(str, temp_ip))
         return stringify
     elif cidr == 16:
-        temp_ip[2:] = [0] * (len(temp_ip) - 2)
+        temp_ip[2:] = [255] * (len(temp_ip) - 2)
+        temp_ip[-1] = 254
         stringify = '.'.join(map(str, temp_ip))
         return stringify
     elif cidr == 24:
-        temp_ip[3:] = [0] * (len(temp_ip) - 3)
+        temp_ip[3:] = [255] * (len(temp_ip) - 3)
+        temp_ip[-1] = 254
         stringify = '.'.join(map(str, temp_ip))
         return stringify
     elif cidr == 1:
-        return "No network address for these."
+        return "No broadcast address for these."
     
 # Determine the broadcast address
 # --------------------------------------------------------------------------------
