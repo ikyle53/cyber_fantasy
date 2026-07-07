@@ -1,5 +1,5 @@
 def generate_cidr_subnet():
-    user_input = input(f"Enter any IP address in the format of 192.168.1.50/17\n")
+    user_input = input(f"Enter any IP address in the format of 'xxx.xxx.xxx.xxx/xx' (ex: 175.1.1.50/17)\n")
 
 # Parse the input ---------------------------
     # First, split the prefix from the octets
@@ -22,9 +22,14 @@ def generate_cidr_subnet():
 
 # Generate the subnet mask ------------------
     # Create a 32-bit mask
-    bit_mask = gen_bit_mask(int_prefix)
+    bit_mask, decimal_mask = gen_bit_mask(int_prefix)
     print(f"Default subnet mask: {bit_mask}")
 
+# Generate the network address --------------
+    network_address = gen_net_address(octet_split, decimal_mask)
+    print(f"Network address: {network_address}")
+
+# ---------------------------------------------------------------------------------------
 def gen_bit_mask(cidr):
 
     # Binary representation of the CIDR notation
@@ -45,6 +50,34 @@ def gen_bit_mask(cidr):
     # Join all the decimals for readability
     final_decimal = ".".join(map(str, decimal_octets))
 
-    return final_decimal
+    return final_decimal, decimal_octets
+
+# ----------------------------------------------------------------------------------------
+def gen_net_address(ip, subnet):
+
+    # Take the list indexes, shift them according to a 32 bit integer format.
+    ip_32bit = ip[0] << 24 | ip[1] << 16 | ip[2] << 8 | ip[3] # Now = a 32bit number
+
+    # Do the same for the subnet as above and convert to a 32 bit integer
+    subnet_32bit = subnet[0] << 24 | subnet[1] << 16 | subnet[2] << 8 | subnet[3] # Now = a 32bit number
+
+    # Compare bit by bit the ip and subnet
+    """
+    Using the bitwise & operator it compares the two 32 bit numbers. If the subnet has a 1 in its
+    bit it keeps the ip bit. Where the subnet has a 0 it sets the result of ip to 0. This zeros out
+    the host bits and only leaves the network bits.
+    """
+    network_32bit = ip_32bit & subnet_32bit
+
+    # Unpack the results into readable numbers. It shifts the octets back to to 8 bits.
+    # & 255 keeps only the lowest 8 bits (like 01100001)
+    network_address = [
+        (network_32bit >> 24) & 255,
+        (network_32bit >> 16) & 255,
+        (network_32bit >> 8) & 255,
+        network_32bit & 255
+    ]
     
+    final_network_address = ".".join(map(str, network_address))
+    return final_network_address
 generate_cidr_subnet()
