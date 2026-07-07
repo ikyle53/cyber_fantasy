@@ -1,6 +1,6 @@
-# DUTY COMMENCE — Duty 03: Echoes of the prefix
+# DUTY COMMENCE — Duty 03: Realm Cartography
 
-> I once mapped domains through slow and careful steps, counting bits one by one. Then I met a [fellow scholar](https://richardkilleen.co.uk/blog/python/python-bitwise-operators/) who showed me the hidden language of bitwise operations. What had once felt like tedious labor suddenly became precise and swift as if the borders of every realm revealed themselves at a single command. With this new art I could carve the true shape of any domain with clarity and speed.
+> "I once mapped domains through slow and careful steps, counting bits one by one. Then I met a [fellow scholar](https://richardkilleen.co.uk/blog/python/python-bitwise-operators/) who showed me the hidden language of bitwise operations. What had once felt like tedious labor suddenly became precise and swift as if the borders of every realm revealed themselves at a single command. With this new art I could carve the true shape of any domain with clarity and speed."
 
 ### Why I Built This
 Subnetting has a reputation for being difficult and I wanted to truly understand it rather than just memorize rules. I realized that to build something meaningful I first needed to understand how IP addresses are constructed at the binary level. After learning binary and discovering bitwise operations I finally understood how routers and networks actually calculate addresses. This tool lets me take any IP address with a CIDR prefix and reveal its network boundaries, subnet mask, and host information.
