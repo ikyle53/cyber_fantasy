@@ -23,11 +23,23 @@ def generate_cidr_subnet():
 # Generate the subnet mask ------------------
     # Create a 32-bit mask
     bit_mask, decimal_mask = gen_bit_mask(int_prefix)
-    print(f"Default subnet mask: {bit_mask}")
+    print(f"\nDefault subnet mask: {bit_mask}")
 
 # Generate the network address --------------
-    network_address = gen_net_address(octet_split, decimal_mask)
+    network_address, first_host = gen_net_address(octet_split, decimal_mask)
     print(f"Network address: {network_address}")
+
+# Generate the broadcast address ------------
+    broadcast_address, last_host = gen_broadcast_address(octet_split, decimal_mask)
+    print(f"Broadcast address: {broadcast_address}")
+
+# First and last host
+    print(f"First host: {first_host}")
+    print(f"Last host: {last_host}")
+
+# Generate the number of hosts available ----
+    hosts = usable_hosts(int_prefix)
+    print(f"Usable hosts: {hosts}")
 
 # ---------------------------------------------------------------------------------------
 def gen_bit_mask(cidr):
@@ -77,7 +89,54 @@ def gen_net_address(ip, subnet):
         (network_32bit >> 8) & 255,
         network_32bit & 255
     ]
+
+    # generates the first host
+    first_host = [
+        (network_32bit >> 24) & 255,
+        (network_32bit >> 16) & 255,
+        (network_32bit >> 8) & 255,
+        (network_32bit & 255) + 1
+    ]
     
     final_network_address = ".".join(map(str, network_address))
-    return final_network_address
+    final_first_host = ".".join(map(str, first_host))
+    return final_network_address, final_first_host
+
+def gen_broadcast_address(ip, subnet):
+    ip_32bit = ip[0] << 24 | ip[1] << 16 | ip[2] << 8 | ip[3] # Now = a 32bit number
+
+    # Do the same for the subnet as above and convert to a 32 bit integer
+    subnet_32bit = subnet[0] << 24 | subnet[1] << 16 | subnet[2] << 8 | subnet[3] # Now = a 32bit number
+
+    # Compare bit by bit the ip and subnet
+    network_32bit = ip_32bit & subnet_32bit
+
+    # Change the bits using bitwise OR comparing with NOT
+    # Additionally, NOT can cause numbers to grow so it will need addtional
+    # help to stay in the 32 bit range using "& 0xFFFFFFFF"
+    broadcast_32bit = network_32bit | (~subnet_32bit & 0xFFFFFFFF)
+
+    # Unpack the broadcast address
+    broadcast_address = [
+        (broadcast_32bit >> 24) & 255,
+        (broadcast_32bit >> 16) & 255,
+        (broadcast_32bit >> 8) & 255,
+        broadcast_32bit & 255
+    ]
+
+    # generstes the last host
+    last_host = [
+        (broadcast_32bit >> 24) & 255,
+        (broadcast_32bit >> 16) & 255,
+        (broadcast_32bit >> 8) & 255,
+        (broadcast_32bit & 255) - 1
+    ]
+
+    final_broadcast_address = ".".join(map(str, broadcast_address))
+    final_last_host = ".".join(map(str, last_host))
+    return final_broadcast_address, final_last_host
+
+def usable_hosts(cidr):
+    return (2**(32-cidr))-2
+
 generate_cidr_subnet()
